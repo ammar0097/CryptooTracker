@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Oswald:wght@300;400;700&display=swap');
-<<<<<<< HEAD
 
 
 
@@ -12,27 +11,14 @@
   }
 
 
+
 a {
   text-decoration: none;
 }
+
+
 
 .app {
   background-color: #222831;
   min-height: 100vh;
-=======
-
-
-
-* {
-  margin : 0 ;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-
-}
-
-
-a {
-  text-decoration: none;
->>>>>>> 359ccb76d518edfeea9b7553ddb6c6f1b4dc4474
 }
