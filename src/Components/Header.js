@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import "./Header.css";
 import Container from 'react-bootstrap/Container';
@@ -23,3 +24,14 @@ const Header = () => {
 };
 
 export default Header;
+=======
+import React from 'react'
+
+const Header = () => {
+  return (
+    <div>Header</div>
+  )
+}
+
+export default Header
+>>>>>>> 359ccb76d518edfeea9b7553ddb6c6f1b4dc4474
