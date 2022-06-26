@@ -2,6 +2,9 @@ import React from "react";
 import "./Header.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+
+
 import logo from "./crypto.png";
 
 
@@ -10,7 +13,7 @@ const Header = () => {
     <>
       <Navbar className="Nav" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img
               alt=""
               src={logo}
@@ -20,8 +23,10 @@ const Header = () => {
             />{" "}
             Cryptoo
           </Navbar.Brand>
+          <Button variant="outline-warning">Login</Button>
         </Container>
       </Navbar>
+      <h1>haha</h1>
     </>
   );
 };

@@ -1,41 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./CryptoList.css";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
-
-// https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Axios from "axios";
 
 const CryptoList = () => {
+  const [data, setData] = useState();
+  const [positive, setPositive] = useState(true);
+  useEffect(() => {
+    Axios.get(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+    ).then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
+  console.log(data);
+
   return (
     <Container>
-      {" "}
-      <Table striped bordered hover variant="dark">
+      <Form className="list">
+        <InputGroup className="mb-3">
+          <Form.Control
+            aria-label="Example text with button addon"
+            aria-describedby="basic-addon1"
+            placeholder="Search"
+          />
+        </InputGroup>
+      </Form>
+      <Table className="table" hover variant="dark">
         <thead>
           <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th></th>
+            <th>name</th>
+            <th>symbol</th>
+            <th>current_price</th>
+            <th>market_cap</th>
+            <th>market_cap_change_percentage_24h</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {data?.map((res) => {
+            if (res.market_cap_change_percentage_24h > 0) {
+              return (
+                <tr>
+                  <td className="crypto-image">
+                    <img alt="" src={res.image} width="30" height="30" />
+                  </td>
+                  <td>{res.name}</td>
+                  <td>{res.symbol}</td>
+                  <td>{res.current_price}</td>
+                  <td>{res.market_cap}</td>
+                  <td className="td_green">
+                    {res.market_cap_change_percentage_24h.toFixed(2)}%
+                  </td>
+                </tr>
+              );
+            }
+            return (
+              <tr>
+                <td className="crypto-image">
+                  <img alt="" src={res.image} width="30" height="30" />
+                </td>
+                <td>{res.name}</td>
+                <td>{res.symbol}</td>
+                <td>{res.current_price}</td>
+                <td>{res.market_cap}</td>
+                <td className="td_red">
+                  {res.market_cap_change_percentage_24h.toFixed(2)}%
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>

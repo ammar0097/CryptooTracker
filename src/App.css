@@ -10,8 +10,6 @@
 
   }
 
-
-
 a {
   text-decoration: none;
 }
@@ -19,6 +17,6 @@ a {
 
 
 .app {
-  background-color: #222831;
+  background-color: #212529;
   min-height: 100vh;
 }
