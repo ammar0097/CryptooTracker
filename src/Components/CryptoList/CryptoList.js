@@ -5,11 +5,14 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Axios from "axios";
+import { BsFillCaretDownFill } from "react-icons/bs";
+import { BsFillCaretUpFill } from "react-icons/bs";
+import Spinner from "react-bootstrap/Spinner";
 
 const CryptoList = () => {
   const [data, setData] = useState();
-  const [positive, setPositive] = useState(true);
   const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSearchInput = (event) => {
     setSearch(event.target.value);
@@ -25,13 +28,14 @@ const CryptoList = () => {
         )
       )
     );
+    setIsLoading(false);
   }, [search]);
 
   console.log(data);
 
   return (
     <Container>
-      <h1 className="title-header">Search for currency</h1>
+      <h1 className="title-header">Search your cryptocurrency</h1>
       <Form className="list">
         <InputGroup className="mb-3">
           <Form.Control
@@ -54,26 +58,36 @@ const CryptoList = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((res) => (
+          {isLoading ? (
             <tr>
-              <td className="crypto-image">
-                <img alt="" src={res.image} width="30" height="30" />
-              </td>
-              <td>{res.name}</td>
-              <td>{res.symbol}</td>
-              <td>{res.current_price}</td>
-              <td>{res.market_cap}</td>
-              {res.market_cap_change_percentage_24h < 0 ? (
-                <td className="td_red">
-                  {res.market_cap_change_percentage_24h.toFixed(2)}%
-                </td>
-              ) : (
-                <td className="td_green">
-                  {res.market_cap_change_percentage_24h.toFixed(2)}%
-                </td>
-              )}
+            <Spinner size="lg" className="spinner-list" animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
             </tr>
-          ))}
+          ) : (
+            data?.map((res) => (
+              <tr>
+                <td className="crypto-image">
+                  <img alt="" src={res.image} width="30" height="30" />
+                </td>
+                <td>{res.name}</td>
+                <td>{res.symbol}</td>
+                <td>${res.current_price}</td>
+                <td>${res.market_cap}</td>
+                {res.market_cap_change_percentage_24h < 0 ? (
+                  <td className="td_red">
+                    <BsFillCaretDownFill />
+                    {Math.abs(res.market_cap_change_percentage_24h.toFixed(2))}%
+                  </td>
+                ) : (
+                  <td className="td_green">
+                    <BsFillCaretUpFill />
+                    {res.market_cap_change_percentage_24h.toFixed(2)}%
+                  </td>
+                )}
+              </tr>
+            ))
+          )}
         </tbody>
       </Table>
     </Container>
