@@ -9,24 +9,36 @@ import Axios from "axios";
 const CryptoList = () => {
   const [data, setData] = useState();
   const [positive, setPositive] = useState(true);
+  const [search,setSearch] = useState('');
+
+
+  const handleSearchInput = (event) => {
+    setSearch(event.target.value);
+  } 
+
+
+
+
   useEffect(() => {
     Axios.get(
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-    ).then((res) => {
-      setData(res.data);
-    });
-  }, []);
+    ).then((res) => (
+      setData(res.data.filter(item => item.name.toLowerCase().includes(search.toLowerCase())))
+    ));
+  }, [search]);
 
   console.log(data);
 
   return (
     <Container>
+      <h1 className="title-header">Search for currency</h1>
       <Form className="list">
         <InputGroup className="mb-3">
           <Form.Control
             aria-label="Example text with button addon"
             aria-describedby="basic-addon1"
             placeholder="Search"
+            onChange={handleSearchInput}
           />
         </InputGroup>
       </Form>

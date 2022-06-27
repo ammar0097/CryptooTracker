@@ -10,3 +10,8 @@
 .td_red {
     color: red;
 }
+.title-header{
+    color: #f1b423;
+    display : flex;
+    justify-content: center;
+}

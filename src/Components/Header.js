@@ -23,10 +23,9 @@ const Header = () => {
             />{" "}
             Cryptoo
           </Navbar.Brand>
-          <Button variant="outline-warning">Login</Button>
+          <Button size="lg" variant="outline-warning">Login</Button>
         </Container>
       </Navbar>
-      <h1>haha</h1>
     </>
   );
 };
