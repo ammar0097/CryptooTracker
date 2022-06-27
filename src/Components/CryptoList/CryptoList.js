@@ -9,22 +9,22 @@ import Axios from "axios";
 const CryptoList = () => {
   const [data, setData] = useState();
   const [positive, setPositive] = useState(true);
-  const [search,setSearch] = useState('');
-
+  const [search, setSearch] = useState("");
 
   const handleSearchInput = (event) => {
     setSearch(event.target.value);
-  } 
-
-
-
+  };
 
   useEffect(() => {
     Axios.get(
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-    ).then((res) => (
-      setData(res.data.filter(item => item.name.toLowerCase().includes(search.toLowerCase())))
-    ));
+    ).then((res) =>
+      setData(
+        res.data.filter((item) =>
+          item.name.toLowerCase().includes(search.toLowerCase())
+        )
+      )
+    );
   }, [search]);
 
   console.log(data);
@@ -54,38 +54,26 @@ const CryptoList = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((res) => {
-            if (res.market_cap_change_percentage_24h > 0) {
-              return (
-                <tr>
-                  <td className="crypto-image">
-                    <img alt="" src={res.image} width="30" height="30" />
-                  </td>
-                  <td>{res.name}</td>
-                  <td>{res.symbol}</td>
-                  <td>{res.current_price}</td>
-                  <td>{res.market_cap}</td>
-                  <td className="td_green">
-                    {res.market_cap_change_percentage_24h.toFixed(2)}%
-                  </td>
-                </tr>
-              );
-            }
-            return (
-              <tr>
-                <td className="crypto-image">
-                  <img alt="" src={res.image} width="30" height="30" />
-                </td>
-                <td>{res.name}</td>
-                <td>{res.symbol}</td>
-                <td>{res.current_price}</td>
-                <td>{res.market_cap}</td>
+          {data?.map((res) => (
+            <tr>
+              <td className="crypto-image">
+                <img alt="" src={res.image} width="30" height="30" />
+              </td>
+              <td>{res.name}</td>
+              <td>{res.symbol}</td>
+              <td>{res.current_price}</td>
+              <td>{res.market_cap}</td>
+              {res.market_cap_change_percentage_24h < 0 ? (
                 <td className="td_red">
                   {res.market_cap_change_percentage_24h.toFixed(2)}%
                 </td>
-              </tr>
-            );
-          })}
+              ) : (
+                <td className="td_green">
+                  {res.market_cap_change_percentage_24h.toFixed(2)}%
+                </td>
+              )}
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
