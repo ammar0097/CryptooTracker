@@ -21,7 +21,7 @@ const Header = () => {
               height="30"
               className="d-inline-block align-top"
             />{" "}
-            Cryptoo
+            CryptooTracker
           </Navbar.Brand>
           <Button size="lg" variant="outline-warning">Login</Button>
         </Container>

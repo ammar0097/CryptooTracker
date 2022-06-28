@@ -21,17 +21,20 @@ const CryptoList = () => {
   useEffect(() => {
     Axios.get(
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-    ).then((res) =>
-      setData(
-        res.data.filter((item) =>
-          item.name.toLowerCase().includes(search.toLowerCase())
-        )
+    )
+      .then(
+        (res) =>
+          setData(
+            res.data.filter((item) =>
+              item.name.toLowerCase().includes(search.toLowerCase())
+            )
+          ),
       )
-    );
-    setIsLoading(false);
+      .catch(setIsLoading(true));
+      setIsLoading(false);
   }, [search]);
 
-  console.log(data);
+  console.log(isLoading);
 
   return (
     <Container>
@@ -50,20 +53,24 @@ const CryptoList = () => {
         <thead>
           <tr>
             <th></th>
-            <th>name</th>
-            <th>symbol</th>
-            <th>current_price</th>
-            <th>market_cap</th>
-            <th>market_cap_change_percentage_24h</th>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Current price</th>
+            <th>Market cap</th>
+            <th>Market cap change percentage 24h</th>
           </tr>
         </thead>
         <tbody>
           {isLoading ? (
-            <tr>
-            <Spinner size="lg" className="spinner-list" animation="border" role="status">
+            <Spinner
+              size="lg"
+              className="spinner-list"
+              animation="border"
+              role="status"
+              
+            >
               <span className="visually-hidden">Loading...</span>
             </Spinner>
-            </tr>
           ) : (
             data?.map((res) => (
               <tr>
