@@ -2,7 +2,6 @@ import React from "react";
 import "./Header.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
 import logo from "./crypto.png";
 
 
@@ -21,7 +20,6 @@ const Header = () => {
             />{" "}
             CryptooTracker
           </Navbar.Brand>
-          <Button size="lg" variant="outline-warning">Login</Button>
         </Container>
       </Navbar>
     </>
