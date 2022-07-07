@@ -1,7 +1,7 @@
 ## Live Preview 
 https://cryptootracker2.herokuapp.com/
 
-![Screenshot 2022-06-27 145756](https://user-images.githubusercontent.com/63926259/175958552-28fe809c-53c0-45a7-8024-a0d5bb57e585.png)
+![Capture](https://user-images.githubusercontent.com/63926259/177764260-f14ef0ac-329b-4e19-95a0-c10fbada2318.JPG)
 
 
 # Getting Started with Create React App
