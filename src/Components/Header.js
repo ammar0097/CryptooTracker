@@ -3,8 +3,6 @@ import "./Header.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-
-
 import logo from "./crypto.png";
 
 
